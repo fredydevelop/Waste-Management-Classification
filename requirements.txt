@@ -8,7 +8,6 @@ Matplotlib
 pandas
 tensorflow
 keras
-random
 opencv-python
 requests
 Pillow
