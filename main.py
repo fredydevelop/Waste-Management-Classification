@@ -153,7 +153,7 @@ def download_and_save_image(image_url, save_path="downloaded_image.png"):
     except requests.exceptions.ConnectionError as errc:
         st.error(f"Error Connecting: {errc}")
     except requests.exceptions.RequestException as err:
-        st.error(f"Failed to download the image. Error: {err}")
+        st.error(f"Failed to download the image, The Image link is not a downloadble link")
     except Exception as e:
         st.error(f"An unexpected error occurred: {e}")
 
