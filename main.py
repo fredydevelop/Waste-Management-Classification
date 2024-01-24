@@ -88,35 +88,39 @@ def saving_into_dataFrame():
 # from io import BytesIO
 
 def download_and_save_image(image_url, save_path="downloaded_image.png"):
-    response = requests.get(image_url)
-
-    if response.status_code == 200:
-        image_data = BytesIO(response.content)
-        img = Image.open(image_data).convert("RGB")
-        saved_img_path="./"+save_path
-        img.save(saved_img_path)
-        resize_img = resize(img, (150, 150))
-
-        img_array = img_to_array(resize_img)
-        img_array = np.expand_dims(img_array, axis=0)
-
-        img_array_copy = img_array.copy()
-        img_array_copy /= 255.0
-
-        loaded_model = load_model("Waste_Management_Model.h5")
-
-        if st.button("Predict"):
-            prediction = loaded_model.predict(img_array_copy)
-            predicted_class = np.argmax(prediction)
-
-            class_labels = {0: 'cardboard', 1: 'metal', 2: 'paper', 3: 'plastic'}
-            predicted_category = class_labels[predicted_class]
-
-            result = f"This Item is a {predicted_category}"
-            st.success(result)
-            st.image(img, caption=None)
-    else:
+    try:
+        response = requests.get(image_url)
+    
+        if response.status_code == 200:
+            image_data = BytesIO(response.content)
+            img = Image.open(image_data).convert("RGB")
+            saved_img_path="./"+save_path
+            img.save(saved_img_path)
+            resize_img = resize(img, (150, 150))
+    
+            img_array = img_to_array(resize_img)
+            img_array = np.expand_dims(img_array, axis=0)
+    
+            img_array_copy = img_array.copy()
+            img_array_copy /= 255.0
+    
+            loaded_model = load_model("Waste_Management_Model.h5")
+    
+            if st.button("Predict"):
+                prediction = loaded_model.predict(img_array_copy)
+                predicted_class = np.argmax(prediction)
+    
+                class_labels = {0: 'cardboard', 1: 'metal', 2: 'paper', 3: 'plastic'}
+                predicted_category = class_labels[predicted_class]
+    
+                result = f"This Item is a {predicted_category}"
+                st.success(result)
+                st.image(img, caption=None)
+    except:
         st.error(f"Failed to download the image. Status code: {response.status_code}")
+        
+#        else:
+            
 
 def image_url_input():
     st.title("Classification with URL")
