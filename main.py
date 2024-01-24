@@ -107,8 +107,7 @@ def download_and_save_image(image_url, save_path="downloaded_image.png"):
             loaded_model = load_model("Waste_Management_Model.h5")
     except:
         st.error(f"Failed to download the image. Status code: {response.status_code}")
-        
-            if st.button("Predict"):
+    if st.button("Predict"):
                 prediction = loaded_model.predict(img_array_copy)
                 predicted_class = np.argmax(prediction)
     
