@@ -105,7 +105,9 @@ def download_and_save_image(image_url, save_path="downloaded_image.png"):
             img_array_copy /= 255.0
     
             loaded_model = load_model("Waste_Management_Model.h5")
-    
+    except:
+        st.error(f"Failed to download the image. Status code: {response.status_code}")
+        
             if st.button("Predict"):
                 prediction = loaded_model.predict(img_array_copy)
                 predicted_class = np.argmax(prediction)
@@ -116,8 +118,7 @@ def download_and_save_image(image_url, save_path="downloaded_image.png"):
                 result = f"This Item is a {predicted_category}"
                 st.success(result)
                 st.image(img, caption=None)
-    except:
-        st.error(f"Failed to download the image. Status code: {response.status_code}")
+    
         
 #        else:
             
