@@ -104,16 +104,16 @@ def download_and_save_image(image_url, save_path="downloaded_image.png"):
     
         loaded_model = load_model("Waste_Management_Model.h5")
     
-    if st.button("Predict"):
-        prediction = loaded_model.predict(img_array_copy)
-        predicted_class = np.argmax(prediction)
-        
-        class_labels = {0: 'cardboard', 1: 'metal', 2: 'paper', 3: 'plastic'}
-        predicted_category = class_labels[predicted_class]
-        
-        result = f"This Item is a {predicted_category}"
-        st.success(result)
-        st.image(img, caption=None)
+        if st.button("Predict"):
+            prediction = loaded_model.predict(img_array_copy)
+            predicted_class = np.argmax(prediction)
+            
+            class_labels = {0: 'cardboard', 1: 'metal', 2: 'paper', 3: 'plastic'}
+            predicted_category = class_labels[predicted_class]
+            
+            result = f"This Item is a {predicted_category}"
+            st.success(result)
+            st.image(img, caption=None)
     
         
     else:
