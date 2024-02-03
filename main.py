@@ -143,10 +143,31 @@ def download_and_save_image(image_url, save_path="downloaded_image.png"):
     
             class_labels = {0: 'cardboard', 1: 'metal', 2: 'paper', 3: 'plastic'}
             predicted_category = class_labels[predicted_class]
-    
-            result = f"This Item is a {predicted_category}"
-            st.success(result)
-            st.image(img, caption=None)
+
+
+            if predicted_category == "cardboard":
+                result=f"This Item is a {predicted_category}, it should be recycled"
+                # Print the prediction
+                st.success(result)
+                st.image(img, caption=None)
+            elif predicted_category == "metal":
+                result=f"This Item is a {predicted_category}, it should be recycled"
+                # Print the prediction
+                st.success(result)
+                st.image(img, caption=None)
+            elif predicted_category == "plastic":
+                result=f"This Item is a {predicted_category}, it should be recycled"
+                # Print the prediction
+                st.success(result)
+                st.image(img, caption=None)
+            elif predicted_category == "paper":
+                result=f"This Item is a {predicted_category}, it should be disposed"
+                # Print the prediction
+                st.success(result)
+                st.image(img, caption=None)
+
+            else:
+                print(")
 
     except requests.exceptions.HTTPError as errh:
         st.error(f"HTTP Error: {errh}")
