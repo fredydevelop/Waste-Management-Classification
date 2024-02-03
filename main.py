@@ -167,7 +167,7 @@ def download_and_save_image(image_url, save_path="downloaded_image.png"):
                 st.image(img, caption=None)
 
             else:
-                print(")
+                print("")
 
     except requests.exceptions.HTTPError as errh:
         st.error(f"HTTP Error: {errh}")
